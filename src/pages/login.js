@@ -22,7 +22,9 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Login to BookMart</h2>
+      <img src="/logo.png" alt="logo" width="40" height="40"/>
+      <h2 className={styles.title}>
+      Login to BookMart</h2>
       <form onSubmit={handleLogin} className={styles.form}>
         <input
           type="email"
@@ -40,7 +42,8 @@ export default function Login() {
           required
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>Login</button>
+        <button type="submit" className={styles.button}>
+        Login</button>
       </form>
       <p className={styles.p}>or</p>
       <p className={styles.p}>

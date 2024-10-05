@@ -8,7 +8,8 @@ export default function Home() {
     <div>
       {/* Navbar */}
       <nav style={styles.navbar}>
-        <div style={styles.logo}>📚 BookMart</div>
+        <div style={styles.logo}>
+        <img src="/logo.png" alt="logo" width="40" height="40"/> BookMart</div>
         <ul style={styles.navItems}>
           <li>Thriller</li>
           <li>Fiction</li>

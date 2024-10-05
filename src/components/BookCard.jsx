@@ -1,13 +1,14 @@
 // components/BookCard.js
 import React from 'react';
 
-export default function BookCard({ title, author, rating, imageUrl }) {
+export default function BookCard({ title, author, thumbnail,price,avg_rating }) {
   return (
     <div style={styles.card}>
-      <img src={imageUrl} alt={title} style={styles.image} />
+      <img src={thumbnail} alt={title} style={styles.image} />
       <h3>{title}</h3>
       <p>by {author}</p>
-      <p>Rating: {rating} ⭐</p>
+      <p>Rating: {avg_rating} ⭐</p>
+      <p>Rs. {price}</p>
     </div>
   );
 }

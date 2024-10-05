@@ -1,28 +1,39 @@
 // components/BookList.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BookCard from './BookCard';
+import { supabase } from '../lib/supabaseClient'; // Adjust the path as necessary
 
 export default function BookList() {
-  const books = generateSampleBooks(); // Generate sample books here
+  const [books, setBooks] = useState([]); // State to hold book data
+  const [loading, setLoading] = useState(true); // Loading state
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const { data, error } = await supabase
+        .from('books_mastertable') // Your table name
+        .select('*'); // Fetch all fields
+
+      if (error) {
+        console.error('Error fetching books:', error);
+      } else {
+        setBooks(data);
+      }
+      setLoading(false);
+    };
+
+    fetchBooks();
+  }, []); // Run once when component mounts
+
+  if (loading) return <p>Loading...</p>; // Loading state
 
   return (
     <div style={styles.grid}>
-      {books.map((book, index) => (
-        <BookCard key={index} {...book} />
+      {books.map((book) => (
+        <BookCard key={book.bookid} {...book} />
       ))}
     </div>
   );
 }
-
-// Function to generate sample book data
-const generateSampleBooks = () => {
-  return Array.from({ length: 30 }).map((_, i) => ({
-    title: `Book Title ${i + 1}`,
-    author: `Author ${i + 1}`,
-    rating: (Math.random() * 5).toFixed(1), // Random rating between 0.0 and 5.0
-    imageUrl: `https://via.placeholder.com/100x150?text=Book+${i + 1}`, // Placeholder image
-  }));
-};
 
 const styles = {
   grid: {

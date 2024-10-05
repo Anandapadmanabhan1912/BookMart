@@ -28,7 +28,9 @@ export default function Signup() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Create an Account</h2>
+      <img src="/logo.png" alt="logo" width="40" height="40"/>
+      <h2 className={styles.title}>
+      Create an Account</h2>
       <form onSubmit={handleSignup} className={styles.form}>
         <input
           type="text"
