@@ -1,0 +1,89 @@
+/* pages/Auth.module.css */
+
+.container {
+  background-color: rgba(255, 255, 255, 0.0);
+  padding: 20px 40px; /* Adjust padding to balance spacing */
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 50px auto; /* Center the container horizontally */
+  text-align: center; /* Align text inside the container */
+}
+
+.title {
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif; /* Preferred font */
+  color: var(--foreground); /* Use CSS variable */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Align inputs to center */
+  width: 100%; /* Ensure form takes full width */
+}
+
+.input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  width: 100%; /* Take up full width of form */
+  max-width: 300px; /* Prevent input fields from becoming too wide */
+}
+
+.button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0070f3; /* Button color */
+  color: white; /* Button text color */
+  cursor: pointer;
+  width: 100%; /* Make the button full-width */
+  max-width: 300px;
+}
+
+.button:hover {
+  background-color: #005bb5; /* Darker button color on hover */
+}
+
+.link {
+  color: #0070f3; /* Link color */
+  text-decoration: none; /* Remove underline */
+}
+
+.link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.p {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center all elements inside the form */
+  width: 100%; /* Ensure form takes full width */
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.button_signup {
+  padding: 10px;
+  border: none;
+  height: 15%;
+  border-radius: 4px;
+  background-color: #7d818637; /* Button color */
+  color: rgb(1, 0, 0); /* Button text color */
+  cursor: pointer;
+  width: 80%;
+  margin: 5px;
+
+
+}
+
+.button_signup:hover {
+  background-color: #555758; /* Darker button color on hover */
+  color: white;
+}
