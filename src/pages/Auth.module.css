@@ -1,7 +1,7 @@
 /* pages/Auth.module.css */
 
 .container {
-  background-color: rgba(255, 255, 255, 0.0);
+  background-color: rgba(255, 255, 255, 0);
   padding: 20px 40px; /* Adjust padding to balance spacing */
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -79,8 +79,6 @@
   cursor: pointer;
   width: 80%;
   margin: 5px;
-
-
 }
 
 .button_signup:hover {

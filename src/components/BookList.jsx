@@ -1,7 +1,7 @@
 // components/BookList.js
-import React, { useEffect, useState } from 'react';
-import BookCard from './BookCard';
-import { supabase } from '../lib/supabaseClient'; // Adjust the path as necessary
+import React, { useEffect, useState } from "react";
+import BookCard from "./BookCard";
+import { supabase } from "../lib/supabaseClient"; // Adjust the path as necessary
 
 export default function BookList() {
   const [books, setBooks] = useState([]); // State to hold book data
@@ -10,11 +10,11 @@ export default function BookList() {
   useEffect(() => {
     const fetchBooks = async () => {
       const { data, error } = await supabase
-        .from('books_mastertable') // Your table name
-        .select('*'); // Fetch all fields
+        .from("books_mastertable") // Your table name
+        .select("*"); // Fetch all fields
 
       if (error) {
-        console.error('Error fetching books:', error);
+        console.error("Error fetching books:", error);
       } else {
         setBooks(data);
       }
@@ -37,9 +37,9 @@ export default function BookList() {
 
 const styles = {
   grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '1rem',
-    padding: '1rem',
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+    gap: "1rem",
+    padding: "1rem",
   },
 };
