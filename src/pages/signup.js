@@ -1,17 +1,18 @@
 // pages/signup.js
-import { useState } from 'react';
-import styles from './Auth.module.css'; // Reuse the same CSS module
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { useState } from "react";
+import styles from "./Auth.module.css"; // Reuse the same CSS module
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 export default function Signup() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('male'); // Default gender
-  const [address, setAddress] = useState('');
-  const [country, setCountry] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("male"); // Default gender
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -28,9 +29,8 @@ export default function Signup() {
 
   return (
     <div className={styles.container}>
-      <img src="/logo.png" alt="logo" width="40" height="40"/>
-      <h2 className={styles.title}>
-      Create an Account</h2>
+      <img src="/logo.png" alt="logo" width="40" height="40" />
+      <h2 className={styles.title}>Create an Account</h2>
       <form onSubmit={handleSignup} className={styles.form}>
         <input
           type="text"
@@ -88,17 +88,28 @@ export default function Signup() {
           required
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>Sign Up</button>
+        <button type="submit" className={styles.button}>
+          Sign Up
+        </button>
       </form>
-      <p className={styles.p}>or
-      <button className={`${styles.button_signup}`} onClick={handleGoogleSignup}>
-      <FontAwesomeIcon icon={faGoogle} className={styles.icon} />
-        Sign Up with Google
-      </button>
-      <button className={`${styles.button_signup}`} onClick={handleFacebookSignup}>
-      <FontAwesomeIcon icon={faFacebook} className={styles.icon} /> Sign Up with Facebook
-      </button>
-        Already have an account? <a href="/login" className={styles.link}>Login</a>
+      <p className={styles.p}>
+        or
+        <button
+          className={`${styles.button_signup}`}
+          onClick={handleGoogleSignup}
+        >
+          <FontAwesomeIcon icon={faGoogle} className={styles.icon} />
+          Sign Up with Google
+        </button>
+        <button
+          className={`${styles.button_signup}`}
+          onClick={handleFacebookSignup}
+        >
+          <FontAwesomeIcon icon={faFacebook} className={styles.icon} /> Sign Up
+          with Facebook
+        </button>
+        Already have an account?
+        <Link href="/login">Login</Link>
       </p>
     </div>
   );

@@ -1,7 +1,8 @@
 import Image from "next/image";
-import React from 'react';
-import Carousel from '../components/Carousel';
-import BookList from '../components/BookList';
+import React from "react";
+import Carousel from "../components/Carousel";
+import BookList from "../components/BookList";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,7 +10,8 @@ export default function Home() {
       {/* Navbar */}
       <nav style={styles.navbar}>
         <div style={styles.logo}>
-        <img src="/logo.png" alt="logo" width="40" height="40"/> BookMart</div>
+          <img src="/logo.png" alt="logo" width="40" height="40" /> BookMart
+        </div>
         <ul style={styles.navItems}>
           <li>Thriller</li>
           <li>Fiction</li>
@@ -17,6 +19,14 @@ export default function Home() {
           <li>Romance</li>
           <li>Science Fiction</li>
         </ul>
+        {/* login */}
+        <Link href="/login">
+          <button>Login</button>
+        </Link>
+        {/* signup */}
+        <Link href="/signup">
+          <button>Signup</button>
+        </Link>
       </nav>
 
       {/* Horizontal Carousel */}
@@ -35,8 +45,13 @@ export default function Home() {
 }
 
 const styles = {
-  navbar: { display: 'flex', justifyContent: 'space-between', padding: '1rem', background: '#f4f4f4' },
-  logo: { fontSize: '1.5rem', fontWeight: 'bold' },
-  navItems: { display: 'flex', gap: '1rem', listStyle: 'none' },
-  footer: { padding: '2rem', background: '#eee', textAlign: 'center' },
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "1rem",
+    background: "#f4f4f4",
+  },
+  logo: { fontSize: "1.5rem", fontWeight: "bold" },
+  navItems: { display: "flex", gap: "1rem", listStyle: "none" },
+  footer: { padding: "2rem", background: "#eee", textAlign: "center" },
 };

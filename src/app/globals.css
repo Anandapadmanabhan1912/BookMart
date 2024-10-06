@@ -1,22 +1,21 @@
 /* styles/globals.css or create a new CSS module */
 body {
-    color: var(--foreground);
-    background-color: aqua;
-    background-image: url('/background.jpg');; /* Path to your background image */
-    background-size: cover; /* Cover the entire background */
-    background-position: center; /* Center the image */
-    font-family: Arial, Helvetica, sans-serif;
-    min-height: 100vh; /* Ensure it covers the full viewport height */
-  }
-  
-  /* Add a backdrop for forms */
-  .container {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    max-width: 400px; /* Set a maximum width for the form */
-    margin: auto; /* Center the form */
-    margin-top: 50px; /* Add margin at the top */
-  }
-  
+  color: var(--foreground);
+  background-color: aqua;
+  background-image: url("/background.jpg"); /* Path to your background image */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the image */
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+}
+
+/* Add a backdrop for forms */
+.container {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Set a maximum width for the form */
+  margin: auto; /* Center the form */
+  margin-top: 50px; /* Add margin at the top */
+}

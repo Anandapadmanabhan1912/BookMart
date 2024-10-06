@@ -1,4 +1,4 @@
-import '../app/globals.css';  // Ensure correct path to global CSS
+import "../app/globals.css"; // Ensure correct path to global CSS
 
 export default function RootLayout({ children }) {
   return (
@@ -7,4 +7,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
