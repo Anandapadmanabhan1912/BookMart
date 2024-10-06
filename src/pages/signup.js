@@ -1,9 +1,9 @@
 // pages/signup.js
 import { useState } from "react";
 import styles from "./Auth.module.css"; // Reuse the same CSS module
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { JWT_ACCESS_TOKEN } from "@/constants";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -13,24 +13,41 @@ export default function Signup() {
   const [gender, setGender] = useState("male"); // Default gender
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [error, setError] = useState(null);
+  const router = useRouter();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    setError(null);
     // Handle signup logic here
-  };
-
-  const handleGoogleSignup = () => {
-    // Handle Google signup logic here
-  };
-
-  const handleFacebookSignup = () => {
-    // Handle Facebook signup logic here
+    try {
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          dob,
+          gender,
+          address,
+          country,
+        }),
+      });
+      const data = await response.json();
+      // console.log(data);
+      localStorage.setItem(JWT_ACCESS_TOKEN, data.authToken);
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing up:", error);
+      setError("Error signing up. Please try again.");
+    }
   };
 
   return (
     <div className={styles.container}>
       <img src="/logo.png" alt="logo" width="40" height="40" />
       <h2 className={styles.title}>Create an Account</h2>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSignup} className={styles.form}>
         <input
           type="text"
@@ -93,21 +110,6 @@ export default function Signup() {
         </button>
       </form>
       <p className={styles.p}>
-        or
-        <button
-          className={`${styles.button_signup}`}
-          onClick={handleGoogleSignup}
-        >
-          <FontAwesomeIcon icon={faGoogle} className={styles.icon} />
-          Sign Up with Google
-        </button>
-        <button
-          className={`${styles.button_signup}`}
-          onClick={handleFacebookSignup}
-        >
-          <FontAwesomeIcon icon={faFacebook} className={styles.icon} /> Sign Up
-          with Facebook
-        </button>
         Already have an account?
         <Link href="/login">Login</Link>
       </p>
