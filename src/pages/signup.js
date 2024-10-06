@@ -4,6 +4,7 @@ import styles from "./Auth.module.css"; // Reuse the same CSS module
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { JWT_ACCESS_TOKEN } from "@/constants";
+import api from "@/lib/api";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -21,21 +22,17 @@ export default function Signup() {
     setError(null);
     // Handle signup logic here
     try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          dob,
-          gender,
-          address,
-          country,
-        }),
+      const response = await api.post("/api/signup", {
+        name,
+        email,
+        password,
+        dob,
+        gender,
+        address,
+        country,
       });
-      const data = await response.json();
-      // console.log(data);
-      localStorage.setItem(JWT_ACCESS_TOKEN, data.authToken);
+      const token = response.data.authToken;
+      localStorage.setItem(JWT_ACCESS_TOKEN, token);
       router.push("/");
     } catch (error) {
       console.error("Error signing up:", error);
