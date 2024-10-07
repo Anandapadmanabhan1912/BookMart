@@ -9,19 +9,30 @@ import api from "@/lib/api";
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(null);
+  const [query, setQuery] = useState("");
+  const [books, setBooks] = useState([]); // State to hold book data
+  const [loading, setLoading] = useState(true); // Loading state
 
-  useEffect(() => {
-    // Only run on the client side
-    const token = localStorage.getItem(JWT_ACCESS_TOKEN);
-    console.log(token);
-    if (token) {
-      setIsLoggedIn(true); // User is logged in if the token exists
-      getUser();
-    } else {
-      setIsLoggedIn(false);
-      setUserName(null);
+  const fetchBooks = async () => {
+    try {
+      const response = await api.get("/api/getbooks", {
+        params: { search: query }, // `params` automatically appends the query string
+      });
+      if (response.status === 200) {
+        setBooks(response.data.books);
+        setLoading(false);
+      }
+      // console.log(response.data);
+    } catch (error) {
+      console.log("Error fetching books:", error);
     }
-  }, []);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchBooks(); // Fetch books based on search query
+    // console.log("Search query:", query);
+  };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -39,6 +50,20 @@ export default function Home() {
       console.log("Error fetching user data:", error);
     }
   };
+
+  useEffect(() => {
+    // Only run on the client side
+    const token = localStorage.getItem(JWT_ACCESS_TOKEN);
+    console.log(token);
+    if (token) {
+      setIsLoggedIn(true); // User is logged in if the token exists
+      getUser();
+    } else {
+      setIsLoggedIn(false);
+      setUserName(null);
+    }
+    fetchBooks(); // Fetch books on page load
+  }, []);
 
   return (
     <div>
@@ -73,13 +98,24 @@ export default function Home() {
             </Link>
           </div>
         )}
+        <div>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search..."
+            />
+            <button type="submit">Search</button>
+          </form>
+        </div>
       </nav>
 
       {/* Horizontal Carousel */}
       <Carousel />
 
       {/* Book Cards */}
-      <BookList />
+      <BookList books={books} loading={loading} />
 
       {/* Footer */}
       <footer style={styles.footer}>
