@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import api from "@/lib/api";
+import { useRouter } from "next/router";
 import { JWT_ACCESS_TOKEN } from "@/constants";
 
 // BookPage component for rendering the book product details
 export default function BookPage() {
+  const router = useRouter();
+  const { bookid } = router.query;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState(null);
+  const [bookDetails, setBookDetails] = useState(null);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -16,27 +19,44 @@ export default function BookPage() {
 
   const getUser = async () => {
     try {
-      const response = await api.get("/api/getuser");
-      const userName = response.data.user.name;
-      console.log("User name:", userName);
+      const response = await fetch("/api/getuser"); // Adjust as needed
+      const data = await response.json();
+      const userName = data.user.name;
       setUserName(userName);
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
   };
 
+  const fetchBookDetails = async () => {
+    if (bookid) {
+      try {
+        const response = await fetch(`/api/getbookdetails?bookid=${bookid}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          setBookDetails(data);
+        } else {
+          console.error('Error fetching book details:', data.error);
+        }
+      } catch (error) {
+        console.error('Error fetching book details:', error);
+      }
+    }
+  };
+
   useEffect(() => {
-    // Only run on the client side
     const token = localStorage.getItem(JWT_ACCESS_TOKEN);
-    console.log(token);
     if (token) {
-      setIsLoggedIn(true); // User is logged in if the token exists
+      setIsLoggedIn(true);
       getUser();
     } else {
       setIsLoggedIn(false);
       setUserName(null);
     }
-  }, []);
+
+    fetchBookDetails();
+  }, [bookid]);
 
   return (
     <div>
@@ -61,11 +81,9 @@ export default function BookPage() {
           </div>
         ) : (
           <div>
-            {/* login */}
             <Link href="/login">
               <button>Login</button>
             </Link>
-            {/* signup */}
             <Link href="/signup">
               <button>Signup</button>
             </Link>
@@ -75,34 +93,49 @@ export default function BookPage() {
 
       {/* Main Book Product Section */}
       <div className="container" style={styles.container}>
-        <div className="product-section" style={styles.productSection}>
-          <div className="image" style={styles.image}>
-            <img
-              src="https://m.media-amazon.com/images/I/41Jq0mYjyYL.jpg"
-              alt="Book"
-              id="product-image"
-              style={styles.imageTag} 
-            />{/*book image*/}
+        {bookDetails ? (
+          <div className="product-section" style={styles.productSection}>
+            <div className="image" style={styles.image}>
+              <img
+                src={bookDetails.thumbnail} // Assuming image_url is a field in your table
+                alt="Book"
+                id="product-image"
+                style={styles.imageTag} 
+              />{/*book image*/}
+            </div>
+            <div className="details" style={styles.details}>
+              <h1>{bookDetails.title}</h1> {/*name of book*/}
+              <div className="rating" style={styles.rating}>
+              <div className="rating" style={{ display: 'flex', alignItems: 'center', fontSize: '14px', color: '#555' }}>
+  <span style={{ marginRight: '5px' }}>
+    ★ {bookDetails.avg_rating}
+  </span>
+  <span>
+    <br />
+    <br />
+
+    {bookDetails.ratings_count} Ratings {bookDetails.review_count} Reviews
+  </span>
+</div>
+                <br />
+                <span>Author: <strong>{bookDetails.author}</strong></span>
+                <br />{/*  author */}
+                <span>{bookDetails.description}</span>
+              </div>
+              <div className="price-section" style={styles.priceSection}>
+                <p className="price" style={styles.price}>₹{bookDetails.price}</p> {/*change  price*/}
+                <p className="original-price" style={styles.originalPrice}>₹{bookDetails.original_price}</p> {/*optional to change*/}
+                <p className="discount" style={styles.discount}>({bookDetails.discount}% off)</p> {/*offer percent */}
+              </div>
+              <div className="cta-buttons" style={styles.ctaButtons}>
+                <button id="add-to-cart" style={styles.addToCart}>Add to Cart</button>{/* give hyperlink to addtocart page */}
+                <button id="buy-now" style={styles.buyNow}>Buy Now</button>{/* give hyperlink to payment or buy page */}
+              </div>
+            </div>
           </div>
-          <div className="details" style={styles.details}>
-            <h1>Object Oriented Programming C++ Balaguruswamy Third Edition [Paperback]</h1>{/*name of book*/}
-            <div className="rating" style={styles.rating}>
-              <span>4.3 ★</span> {/*rating*/}
-              <span>249 Ratings & 12 Reviews</span>{/* review*/}
-              <br />
-              <span>Author: Balaguruswamy</span>{/*  author*/}
-            </div>
-            <div className="price-section" style={styles.priceSection}>
-              <p className="price" style={styles.price}>₹398</p> {/*change  price*/}
-              <p className="original-price" style={styles.originalPrice}>₹549</p> {/*optional to change*/}
-              <p className="discount" style={styles.discount}>(27% off)</p> {/*offer percent */}
-            </div>
-            <div className="cta-buttons" style={styles.ctaButtons}>
-              <button id="add-to-cart" style={styles.addToCart}>Add to Cart</button>{/* give hyper link to addtocart page */}
-              <button id="buy-now" style={styles.buyNow}>Buy Now</button>{/* give hyper link to payment or buy page */}
-            </div>
-          </div>
-        </div>
+        ) : (
+          <p>Loading book details...</p>
+        )}
       </div>
 
       {/* Footer */}
@@ -121,6 +154,12 @@ const styles = {
     justifyContent: "space-between",
     padding: "1rem",
     background: "#f4f4f4",
+  },
+  rating: {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '14px',
+    color: '#555',
   },
   logo: { fontSize: "1.5rem", fontWeight: "bold" },
   navItems: { display: "flex", gap: "1rem", listStyle: "none" },

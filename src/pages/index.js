@@ -120,7 +120,7 @@ export default function Home() {
       {/* Footer */}
       <footer style={styles.footer}>
         <p>Contact: info@bookmart.com</p>
-        <p>Address: 123 Book Street, Booktown</p>
+        <p>Address: 123 Book Street, Booktown, India</p>
       </footer>
     </div>
   );

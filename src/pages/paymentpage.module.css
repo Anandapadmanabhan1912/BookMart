@@ -1,0 +1,146 @@
+/* General body styling */
+/* :global(body) {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa; /* Light background for contrast
+    line-height: 1.6; } 
+*/
+
+/* Container styling */
+.container {
+    max-height: 100vh; /* Limit the container height */
+    overflow: hidden; /* Hide overflow */
+    padding: 1rem; /* Add padding for spacing */
+    box-sizing: border-box; /* Include padding/border in total width/height */
+}
+
+/* Row styling */
+.row {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Distribute space between items */
+    gap: 1rem; /* Consistent gap between flex items */
+}
+
+/* Left Side: Shopping Cart Details */
+.cart-details {
+    max-height: calc(100vh - 2rem); /* Allow space for padding */
+    overflow-y: auto; /* Enable scrolling if needed */
+    padding-right: 1rem; /* Add padding for better scrolling experience */
+}
+
+/* Right Side: Payment Options */
+.payment-options {
+    margin-left: 1rem; /* Use rem for consistency */
+    flex-shrink: 0; /* Prevent shrinking */
+    max-height: calc(100vh - 2rem); /* Allow space for padding */
+    padding: 1rem; /* Add padding for better structure */
+    background-color: #fff; /* Distinct background for payment section */
+    border-radius: 0.25rem; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Table styling */
+.table {
+    font-size: 0.9rem; /* Smaller font size for the table */
+    margin-bottom: 1rem; /* Space below the table */
+    width: 100%; /* Ensure the table takes full width */
+    border-collapse: collapse; /* Remove gaps between table cells */
+}
+
+.table th, .table td {
+    padding: 0.75rem; /* Slightly more padding for better readability */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #dee2e6; /* Add border to table cells */
+}
+
+/* Card styling */
+.card {
+    padding: 1rem; /* Increase padding for more space */
+    border: 1px solid #dee2e6; /* Light border for the card */
+    border-radius: 0.5rem; /* Slightly larger rounded corners */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow */
+    background-color: #fff; /* Ensure background is white */
+}
+
+/* Button styling */
+.btn {
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    padding: 12px; /* Slightly more padding for a bigger button */
+    width: 100%; /* Full width of the card */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 0.5rem; /* Larger rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Quantity button styling */
+.btn-quantity {
+    width: 30px; /* Fixed width for quantity buttons */
+    height: 30px; /* Fixed height for quantity buttons */
+    margin: 0 5px; /* Space around buttons */
+    background-color: #e9ecef; /* Light background for quantity buttons */
+    border: 1px solid #ced4da; /* Border for quantity buttons */
+    border-radius: 0.25rem; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.btn-quantity:hover {
+    background-color: #ced4da; /* Slightly darker on hover */
+}
+
+/* Input styling */
+.input-quantity {
+    width: 50px; /* Increase width for better usability */
+    text-align: center; /* Center text in input */
+    border: 1px solid #ced4da; /* Border for quantity input */
+    border-radius: 0.25rem; /* Rounded corners */
+}
+
+/* Margin bottom utilities */
+.mb-0 {
+    margin-bottom: 0; /* Remove bottom margin */
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem; /* Consistent margin unit */
+}
+
+.mb-2 {
+    margin-bottom: 1rem; /* Larger margin for spacing */
+}
+
+/* Payment options styling */
+.payment-options {
+    margin-top: 1rem; /* Use rem for consistency */
+}
+
+.form-check {
+    margin-bottom: 0.75rem; /* Slightly more space between options */
+}
+
+.form-check-input {
+    margin-right: 10px; /* Space between radio button and label */
+}
+
+/* Footer styling */
+.footer {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 1rem 0; /* Increase padding for better spacing */
+    position: relative; /* Position relative to content */
+    width: 100%; /* Full width */
+    bottom: 0; /* Aligns at the bottom */
+    text-align: center; /* Center-align footer content */
+}
+
+.footer p {
+    margin: 0; /* Remove default margin */
+    color: #6c757d; /* Dark gray text */
+    font-size: 0.9rem; /* Smaller footer text */
+}
