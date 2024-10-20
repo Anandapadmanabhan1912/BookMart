@@ -1,7 +1,9 @@
 // src/app/api/getbookdetails/route.js
 
-//import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 import { supabase } from "@/lib/supabaseClient";
+
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_KEY);
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
